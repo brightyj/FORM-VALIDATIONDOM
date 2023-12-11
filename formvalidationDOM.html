@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form Validation & DOM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:cadetblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #regForm {
+            background-color:darkgoldenrod;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        .error-message {
+            color: green;
+            font-size: 15px;
+        }
+
+        button {
+            background-color:blue
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color:cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="registrationForm">
+        <h2>Registration</h2>
+        <form id="form">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName">
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName">
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <button type="button" onclick="validateForm()">Submit</button>
+            <button type="button" onclick="clearForm()">Clear</button>
+        </form>
+    </div>
+
+    <!--Javascript-->
+    <script>
+        function validateForm() {
+            var firstNameInput = document.getElementById("firstName");
+            var lastNameInput = document.getElementById("lastName");
+            var emailInput = document.getElementById("email");
+            var passwordInput = document.getElementById("password");
+            
+            clearErrors();
+            if (firstNameInput.value === "") {
+                showError(firstNameInput, "First Name is required.");
+                return;
+            }
+
+            if (lastNameInput.value === "") {
+                showError(lastNameInput, "Last Name is required.");
+                return;
+            }
+
+            if (emailInput.value === "") {
+                showError(emailInput, "Email is required.");
+                return;
+            }
+
+            if (passwordInput.value === "") {
+                showError(passwordInput, "Password is required.");
+                return;
+            }
+
+            if (passwordInput.value.length < 8) {
+                showError(passwordInput, "Password must be at least 8 characters long.");
+                return;
+            }
+            
+            alert("Registration successful!");
+        }
+
+        function clearForm() {
+            
+            var formInputs = document.querySelectorAll("form input");
+            formInputs.forEach(function (input) {
+                input.value = "";
+            });
+        clearErrors();
+        }
+             
+    </script>
+</body>
+</html>
